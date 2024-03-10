@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { DateRangePicker } from "react-date-range";
-import "react-date-range/dist/styles.css";
-import "react-date-range/dist/theme/default.css";
+import "react-date-range/dist/styles.css"; // main style file
+import "react-date-range/dist/theme/default.css"; // theme css file
 
 const DateComparisonSelector = () => {
   const [startDate, setStartDate] = useState<Date | null>(null);
@@ -36,23 +36,25 @@ const DateComparisonSelector = () => {
           onChange={handleDateRangeChange}
         />
       </div>
-      <div className="mb-2">
-        <label className="mr-2">Start Date:</label>
-        <DatePicker
-          selected={startDate}
-          onChange={handleStartDateChange}
-          dateFormat="yyyy-MM-dd"
-          className="p-2 border rounded focus:outline-none focus:border-blue-500"
-        />
-      </div>
-      <div>
-        <label className="mr-2">End Date:</label>
-        <DatePicker
-          selected={endDate}
-          onChange={handleEndDateChange}
-          dateFormat="yyyy-MM-dd"
-          className="p-2 border rounded focus:outline-none focus:border-blue-500"
-        />
+      <div className="flex mb-2">
+        <div className="mr-4">
+          <label className="mr-2">Start Date:</label>
+          <DatePicker
+            selected={startDate}
+            onChange={handleStartDateChange}
+            dateFormat="yyyy-MM-dd"
+            className="p-2 border rounded focus:outline-none focus:border-blue-500"
+          />
+        </div>
+        <div>
+          <label className="mr-2">End Date:</label>
+          <DatePicker
+            selected={endDate}
+            onChange={handleEndDateChange}
+            dateFormat="yyyy-MM-dd"
+            className="p-2 border rounded focus:outline-none focus:border-blue-500"
+          />
+        </div>
       </div>
     </div>
   );

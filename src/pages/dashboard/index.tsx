@@ -100,8 +100,9 @@ export const Dashboard: React.FC = () => {
   return (
     <>
       <div>
-        <DateComparisonSelector />
-
+        <div className="flex flex-col items-center justify-center h-full">
+          <DateComparisonSelector />
+        </div>
         <TabView tabs={tabs} />
       </div>
     </>
