@@ -7,6 +7,7 @@ import { ResponsiveBarChart } from "../../components/dashboard/ResponsiveBarChar
 import { TabView } from "../../components/dashboard/TabView";
 import { RecentSales } from "../../components/dashboard/RecentSales";
 import { IChartDatum, TTab } from "../../interfaces";
+import DateComparisonSelector from "../../components/dashboard/DateComparisonSelector";
 
 const filters: CrudFilter[] = [
   {
@@ -98,7 +99,11 @@ export const Dashboard: React.FC = () => {
 
   return (
     <>
-      <TabView tabs={tabs} />
+      <div>
+        <DateComparisonSelector />
+
+        <TabView tabs={tabs} />
+      </div>
     </>
   );
 };
