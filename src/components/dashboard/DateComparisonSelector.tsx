@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { DateRangePicker } from "react-date-range";
-import "react-date-range/dist/styles.css"; // main style file
-import "react-date-range/dist/theme/default.css"; // theme css file
+import "react-date-range/dist/styles.css";
+import "react-date-range/dist/theme/default.css";
 
 const DateComparisonSelector = () => {
   const [startDate, setStartDate] = useState<Date | null>(null);
@@ -12,16 +12,14 @@ const DateComparisonSelector = () => {
     setStartDate(ranges.selection.startDate);
     setEndDate(ranges.selection.endDate);
 
-    const startMonth = ranges.selection.startDate.getUTCMonth() + 1; // Months are 1-12
+    const startMonth = ranges.selection.startDate.getUTCMonth() + 1;
     const startYear = ranges.selection.startDate.getUTCFullYear();
 
-    // Format the result as "MONTH - YEAR"
     const formattedStartDate = `${startMonth}/${startYear}`;
 
-    const endMonth = ranges.selection.endDate.getUTCMonth() + 1; // Months are 1-12
+    const endMonth = ranges.selection.endDate.getUTCMonth() + 1;
     const endYear = ranges.selection.endDate.getUTCFullYear();
 
-    // Format the result as "MONTH - YEAR"
     const formattedEndDate = `${endMonth}/${endYear}`;
 
     setDateString(`${formattedStartDate} - ${formattedEndDate}`);

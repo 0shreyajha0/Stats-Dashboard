@@ -3,7 +3,7 @@ import { MdModeEditOutline } from "react-icons/md";
 import { TiArrowSortedUp } from "react-icons/ti";
 import { BsGraphUp } from "react-icons/bs";
 
-export const SessionCard = (props) => {
+export const SessionCard = (props: any) => {
   return (
     <div className="card w-64 p-4 bg-base-100 shadow-xl ml-4 hover:bg-slate-50">
       <div className="flex justify-between items-center">
