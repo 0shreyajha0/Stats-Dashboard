@@ -3,7 +3,7 @@ import { MdModeEditOutline } from "react-icons/md";
 import { TiArrowSortedUp } from "react-icons/ti";
 import { BsGraphUp } from "react-icons/bs";
 
-export const SessionCard = () => {
+export const SessionCard = (props) => {
   return (
     <div className="card w-64 p-4 bg-base-100 shadow-xl ml-4 hover:bg-slate-50">
       <div className="flex justify-between items-center">
@@ -11,7 +11,7 @@ export const SessionCard = () => {
           className="text-base font-medium tooltip tooltip-bottom border-dotted border-b-2 border-grey-900"
           data-tip="Your online store's traffic volume, shown in a sessions."
         >
-          Online Store Sessions
+          {props.cardName}
         </h6>
         <ul className="menu lg:menu-horizontal !p-1 !border-hidden">
           <li>

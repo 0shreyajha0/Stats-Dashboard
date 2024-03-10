@@ -59,7 +59,10 @@ export const ResponsiveAreaChart = ({ data }: TResponsiveAreaChartProps) => {
         />
         <div className="collapse-title ">
           <div className="flex pb-4">
-            <SessionCard /> <SessionCard /> <SessionCard /> <SessionCard />
+            <SessionCard cardName={"Online store session"} />{" "}
+            <SessionCard cardName={"Net Return Value"} />{" "}
+            <SessionCard cardName={" Total Orders"} />{" "}
+            <SessionCard cardName={" Conversion Rate"} />
           </div>
         </div>
         <div className="collapse-content">
