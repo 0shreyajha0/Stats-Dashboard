@@ -37,6 +37,12 @@ export interface IChart {
   trend: number;
 }
 
+export interface IChartDatum2 {
+  date: string;
+  currentValue: string;
+  previousValue: string;
+}
+
 export interface IProduct {
   id: number;
   name: string;

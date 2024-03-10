@@ -1,5 +1,5 @@
-import React, { useMemo } from "react";
-import { CrudFilter, useList } from "@refinedev/core";
+import React, { useMemo, useState } from "react";
+import { CrudFilter, GitHubBanner, useList } from "@refinedev/core";
 import dayjs from "dayjs";
 import Stats from "../../components/dashboard/Stats";
 import { ResponsiveAreaChart } from "../../components/dashboard/ResponsiveAreaChart";
@@ -23,6 +23,12 @@ const filters: CrudFilter[] = [
 ];
 
 export const Dashboard: React.FC = () => {
+  const [isCollapsed, setIsCollapsed] = useState(false);
+
+  const toggleCollapse = () => {
+    setIsCollapsed(!isCollapsed);
+  };
+
   const { data: dailyRevenue } = useList<IChartDatum>({
     resource: "dailyRevenue",
     filters,
@@ -65,6 +71,7 @@ export const Dashboard: React.FC = () => {
           data={memoizedRevenueData}
           colors={{
             stroke: "rgb(54, 162, 235)",
+            fill: "rgb(0,0,0)",
           }}
         />
       ),
@@ -91,6 +98,7 @@ export const Dashboard: React.FC = () => {
           data={memoizedNewCustomersData}
           colors={{
             stroke: "rgb(76, 175, 80)",
+            fill: "rgb(0,0,0)",
           }}
         />
       ),
@@ -98,13 +106,26 @@ export const Dashboard: React.FC = () => {
   ];
 
   return (
-    <>
-      <div>
-        <div className="flex flex-col items-center justify-center h-full">
+    <div>
+      <div className="flex justify-center mt-4 mb-4">
+        <button
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          onClick={toggleCollapse}
+        >
+          {isCollapsed ? "Show Date Range Picker" : "Hide Date Range Picker"}
+        </button>
+      </div>
+      {!isCollapsed && (
+        <div className="flex justify-center">
           <DateComparisonSelector />
         </div>
-        <TabView tabs={tabs} />
-      </div>
-    </>
+      )}
+      <Stats
+        dailyRevenue={dailyRevenue}
+        dailyOrders={dailyOrders}
+        newCustomers={newCustomers}
+      />
+      <TabView tabs={tabs} />
+    </div>
   );
 };
