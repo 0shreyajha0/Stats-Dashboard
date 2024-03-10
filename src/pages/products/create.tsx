@@ -21,14 +21,6 @@ export const ProductCreate: React.FC<IResourceComponentsProps> = () => {
     resource: "categories",
   });
 
-  function handleChange(event: ChangeEvent<HTMLSelectElement>): void {
-    throw new Error("Function not implemented.");
-  }
-
-  function handleBlur(event: FocusEvent<HTMLSelectElement, Element>): void {
-    throw new Error("Function not implemented.");
-  }
-
   return (
     <div className="page-container">
       <div className="flex justify-start items-center">
@@ -81,21 +73,13 @@ export const ProductCreate: React.FC<IResourceComponentsProps> = () => {
             {...register("category.id", {
               required: "This field is required",
             })}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            ref={"ref"}
-            name="category.id"
           >
-            <option value="" disabled selected>
-              Select category
-            </option>
             {categoryOptions?.map((option) => (
               <option value={option.value} key={option.value}>
                 {option.label}
               </option>
             ))}
           </select>
-
           <span style={{ color: "red" }}>
             {(errors as any)?.category?.id?.message as string}
           </span>

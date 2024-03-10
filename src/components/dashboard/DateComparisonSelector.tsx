@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
 import { DateRangePicker } from "react-date-range";
 import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css"; // theme css file
@@ -8,18 +6,25 @@ import "react-date-range/dist/theme/default.css"; // theme css file
 const DateComparisonSelector = () => {
   const [startDate, setStartDate] = useState<Date | null>(null);
   const [endDate, setEndDate] = useState<Date | null>(null);
-
-  const handleStartDateChange = (date: Date | null) => {
-    setStartDate(date);
-  };
-
-  const handleEndDateChange = (date: Date | null) => {
-    setEndDate(date);
-  };
+  const [dateString, setDateString] = useState<string>("");
 
   const handleDateRangeChange = (ranges: any) => {
     setStartDate(ranges.selection.startDate);
     setEndDate(ranges.selection.endDate);
+
+    const startMonth = ranges.selection.startDate.getUTCMonth() + 1; // Months are 1-12
+    const startYear = ranges.selection.startDate.getUTCFullYear();
+
+    // Format the result as "MONTH - YEAR"
+    const formattedStartDate = `${startMonth}/${startYear}`;
+
+    const endMonth = ranges.selection.endDate.getUTCMonth() + 1; // Months are 1-12
+    const endYear = ranges.selection.endDate.getUTCFullYear();
+
+    // Format the result as "MONTH - YEAR"
+    const formattedEndDate = `${endMonth}/${endYear}`;
+
+    setDateString(`${formattedStartDate} - ${formattedEndDate}`);
   };
 
   const selectionRange = {
@@ -29,33 +34,37 @@ const DateComparisonSelector = () => {
   };
 
   return (
-    <div className="flex flex-col">
-      <div className="mb-4">
-        <DateRangePicker
-          ranges={[selectionRange]}
-          onChange={handleDateRangeChange}
-        />
-      </div>
-      <div className="flex mb-2">
-        <div className="mr-4">
-          <label className="mr-2">Start Date:</label>
-          <DatePicker
-            selected={startDate}
-            onChange={handleStartDateChange}
-            dateFormat="yyyy-MM-dd"
-            className="p-2 border rounded focus:outline-none focus:border-blue-500"
+    <div>
+      <input
+        type="text"
+        value={dateString}
+        placeholder="Select date range here"
+        className="input input-bordered w-full max-w-xs mb-2"
+        onClick={() =>
+          (
+            document.getElementById("my_modal_2") as HTMLDialogElement
+          )?.showModal()
+        }
+      />
+      <dialog id="my_modal_2" className="modal">
+        <div
+          className="modal-box"
+          style={{ width: "620px", maxWidth: "unset" }}
+        >
+          <DateRangePicker
+            ranges={[selectionRange]}
+            onChange={handleDateRangeChange}
           />
+          <div className="modal-action">
+            <form method="dialog">
+              <button className="btn">Save</button>
+            </form>
+          </div>
         </div>
-        <div>
-          <label className="mr-2">End Date:</label>
-          <DatePicker
-            selected={endDate}
-            onChange={handleEndDateChange}
-            dateFormat="yyyy-MM-dd"
-            className="p-2 border rounded focus:outline-none focus:border-blue-500"
-          />
-        </div>
-      </div>
+        <form method="dialog" className="modal-backdrop">
+          <button>close</button>
+        </form>
+      </dialog>
     </div>
   );
 };

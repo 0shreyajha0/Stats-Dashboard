@@ -1,13 +1,11 @@
-import React, { useMemo, useState } from "react";
-import { CrudFilter, GitHubBanner, useList } from "@refinedev/core";
+import React from "react";
+import { CrudFilter, useList } from "@refinedev/core";
 import dayjs from "dayjs";
 import Stats from "../../components/dashboard/Stats";
 import { ResponsiveAreaChart } from "../../components/dashboard/ResponsiveAreaChart";
-import { ResponsiveBarChart } from "../../components/dashboard/ResponsiveBarChart";
 import { TabView } from "../../components/dashboard/TabView";
 import { RecentSales } from "../../components/dashboard/RecentSales";
 import { IChartDatum, TTab } from "../../interfaces";
-import DateComparisonSelector from "../../components/dashboard/DateComparisonSelector";
 
 const filters: CrudFilter[] = [
   {
@@ -22,13 +20,57 @@ const filters: CrudFilter[] = [
   },
 ];
 
+const dataG = [
+  {
+    name: "Oct 2022",
+    uv: 18000,
+    pv: 25000,
+    amt: 2400,
+  },
+  {
+    name: "Dec 2022",
+    uv: 23000,
+    pv: 18800,
+    amt: 2210,
+  },
+  {
+    name: "Feb 2023",
+    uv: 40000,
+    pv: 36000,
+    amt: 2290,
+  },
+  {
+    name: "Apr 2023",
+    uv: 21000,
+    pv: 12800,
+    amt: 2000,
+  },
+  {
+    name: "Jun 2023",
+    uv: 29000,
+    pv: 24000,
+    amt: 2000,
+  },
+  {
+    name: "Aug 2023",
+    uv: 22000,
+    pv: 26000,
+    amt: 2000,
+  },
+  {
+    name: "Oct 2023",
+    uv: 27000,
+    pv: 30000,
+    amt: 2000,
+  },
+  {
+    name: "Dec 2023",
+    uv: 6000,
+    pv: 15000,
+    amt: 2000,
+  },
+];
 export const Dashboard: React.FC = () => {
-  const [isCollapsed, setIsCollapsed] = useState(false);
-
-  const toggleCollapse = () => {
-    setIsCollapsed(!isCollapsed);
-  };
-
   const { data: dailyRevenue } = useList<IChartDatum>({
     resource: "dailyRevenue",
     filters,
@@ -44,23 +86,6 @@ export const Dashboard: React.FC = () => {
     filters,
   });
 
-  const useMemoizedChartData = (d: any) => {
-    return useMemo(() => {
-      return d?.data?.data?.map((item: IChartDatum) => ({
-        date: new Intl.DateTimeFormat("en-US", {
-          month: "short",
-          year: "numeric",
-          day: "numeric",
-        }).format(new Date(item.date)),
-        value: item?.value,
-      }));
-    }, [d]);
-  };
-
-  const memoizedRevenueData = useMemoizedChartData(dailyRevenue);
-  const memoizedOrdersData = useMemoizedChartData(dailyOrders);
-  const memoizedNewCustomersData = useMemoizedChartData(newCustomers);
-
   const tabs: TTab[] = [
     {
       id: 1,
@@ -68,36 +93,9 @@ export const Dashboard: React.FC = () => {
       content: (
         <ResponsiveAreaChart
           kpi="Daily revenue"
-          data={memoizedRevenueData}
+          data={dataG}
           colors={{
             stroke: "rgb(54, 162, 235)",
-            fill: "rgb(0,0,0)",
-          }}
-        />
-      ),
-    },
-    {
-      id: 2,
-      label: "Daily Orders",
-      content: (
-        <ResponsiveBarChart
-          kpi="Daily orders"
-          data={memoizedOrdersData}
-          colors={{
-            stroke: "rgb(255, 159, 64)",
-          }}
-        />
-      ),
-    },
-    {
-      id: 3,
-      label: "New Customers",
-      content: (
-        <ResponsiveAreaChart
-          kpi="New customers"
-          data={memoizedNewCustomersData}
-          colors={{
-            stroke: "rgb(76, 175, 80)",
             fill: "rgb(0,0,0)",
           }}
         />
@@ -107,19 +105,6 @@ export const Dashboard: React.FC = () => {
 
   return (
     <div>
-      <div className="flex justify-center mt-4 mb-4">
-        <button
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-          onClick={toggleCollapse}
-        >
-          {isCollapsed ? "Show Date Range Picker" : "Hide Date Range Picker"}
-        </button>
-      </div>
-      {!isCollapsed && (
-        <div className="flex justify-center">
-          <DateComparisonSelector />
-        </div>
-      )}
       <Stats
         dailyRevenue={dailyRevenue}
         dailyOrders={dailyOrders}
