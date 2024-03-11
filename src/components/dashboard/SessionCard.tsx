@@ -5,7 +5,7 @@ import { BsGraphUp } from "react-icons/bs";
 
 export const SessionCard = (props: any) => {
   return (
-    <div className="card w-64 p-4 bg-base-100 shadow-xl ml-4 hover:bg-slate-50">
+    <div className="card w-64 p-4 bg-base-100 shadow-xl ml-4 hover:bg-slate-200">
       <div className="flex justify-between items-center">
         <h6
           className="text-base font-medium tooltip tooltip-bottom border-dotted border-b-2 border-grey-900"
@@ -62,9 +62,9 @@ export const SessionCard = (props: any) => {
         </ul>
       </div>
       <div className="flex items-center">
-        <h3 className="text-lg mr-2 font-bold">255,556</h3>
+        <h3 className="text-lg mr-2 font-bold">{props.amount}</h3>
         <TiArrowSortedUp />
-        <h4>8%</h4>
+        <h4>{props.rate}%</h4>
       </div>
     </div>
   );
