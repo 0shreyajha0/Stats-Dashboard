@@ -6,7 +6,7 @@ Welcome to  the Dashboard, which developed by the Shreya using Refine templat
 
 - [Installation](#installation)
 - [Content](#content)
-- [Approach](#Approach)
+- [Approach and Implementation](#approach)
 
 ## Installation
 
@@ -37,6 +37,8 @@ Run the following command to download the project:
 
 Your application will be accessible at http://localhost:5173 in your browser
 
+## Content
+
 ![Dashboard](public/assets/Dashboard.png)
 
 ![Line Graph](public/assets/LineGraph.png)
@@ -45,10 +47,15 @@ Your application will be accessible at http://localhost:5173 in your browser
 
 ![Recent Sales](public/assets/RecentSales.png)
 
-## Usage
+## Approach and Implementation
 
-Guidelines for using your project.
-
-## Configuration
-
-Details on how to configure your project.
+1. First I downloaded the template from https://github.com/refinedev/refine
+2. removed extra components like **GithubBaner** and link to pages like product and categories from nav bar and extra charts Fromm Index.tsx
+3. In **ResponsiveAreaChart** component : to develop charts like given design changed AreaChart to LineChart from library of Recharts inside RespinsiveContainer
+   and woked on its child compomnents - CartesianGrid , XAxis, YAxis, Line
+   CartesianGrid : added false to vertical to remove vertical lines and added color to stroke
+   XAxis and YAxis : removed axis lines and fixed tick count and tick format
+   Line : Added/Edited needed properties like color , opacity , dots, stoke width
+4. outsiide **ResponsiveContainer** added components to show date from to
+5. Developed a new component **SessionCard** with props cardname, amount, rate
+6. Added new component of **date range picker** on top of chart to allow user use range of date
