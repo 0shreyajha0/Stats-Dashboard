@@ -62,9 +62,9 @@ export const SessionCard = (props: any) => {
         </ul>
       </div>
       <div className="flex items-center">
-        <h3 className="text-lg mr-2 font-bold">{props.amount}</h3>
+        <h3 className="text-lg mr-2 font-bold">255,581</h3>
         <TiArrowSortedUp />
-        <h4>{props.rate}%</h4>
+        <h4>8%</h4>
       </div>
     </div>
   );
