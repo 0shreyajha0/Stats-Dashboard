@@ -37,7 +37,7 @@ Run the following command to download the project:
 
 Your application will be accessible at http://localhost:5173 in your browser
 
-![Dashboard](public/assets/Dashboard.pngDashboard.png)
+![Dashboard](public/assets/Dashboard.png)
 
 ![Line Graph](public/assets/LineGraph.png)
 
